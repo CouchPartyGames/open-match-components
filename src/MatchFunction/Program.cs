@@ -7,10 +7,25 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+builder.Services.AddGrpcSwagger();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1",
+        new OpenApiInfo { Title = "gRPC transcoding", Version = "v1" });
+});
 builder.Services.AddGrpcHealthChecks()
                 .AddCheck("Sample", () => HealthCheckResult.Healthy());
 
+
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment()) {
+    app.UseSwagger();
+	app.UseSwaggerUI(c => {
+    	c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+	});
+}
+
 
 // Configure the HTTP request pipeline.
 app.MapGrpcService<GreeterService>();
