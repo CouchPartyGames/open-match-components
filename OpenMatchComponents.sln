@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DB7594DE-E34
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameFrontend", "src\GameFrontend\GameFrontend.csproj", "{6047C9A8-BDEB-43E0-900A-21FDE2A23D09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchFunction", "src\MatchFunction\MatchFunction.csproj", "{E2C22975-5B20-4B23-AC26-104C4996AA88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +22,13 @@ Global
 		{6047C9A8-BDEB-43E0-900A-21FDE2A23D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6047C9A8-BDEB-43E0-900A-21FDE2A23D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6047C9A8-BDEB-43E0-900A-21FDE2A23D09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2C22975-5B20-4B23-AC26-104C4996AA88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2C22975-5B20-4B23-AC26-104C4996AA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2C22975-5B20-4B23-AC26-104C4996AA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2C22975-5B20-4B23-AC26-104C4996AA88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6047C9A8-BDEB-43E0-900A-21FDE2A23D09} = {DB7594DE-E341-4DE3-ADC8-0D4FFDA5AEF9}
+		{E2C22975-5B20-4B23-AC26-104C4996AA88} = {DB7594DE-E341-4DE3-ADC8-0D4FFDA5AEF9}
 	EndGlobalSection
 EndGlobal
