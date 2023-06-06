@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc().AddJsonTranscoding();
+builder.Services.AddGrpcReflection();
 builder.Services.AddGrpcSwagger();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -20,7 +21,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddGrpcHealthChecks()
                 .AddCheck("Sample", () => HealthCheckResult.Healthy());
 
-builder.Services.AddGrpcReflection();
+
 
 
 var app = builder.Build();
