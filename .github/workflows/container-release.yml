@@ -1,19 +1,19 @@
 name: Build and Publish Image
 
 on:
-  # run it on push to the default repository branch
   push:
-    branches: [main]
-  # run it during pull request
-  pull_request:
-    branches: [main]
+    #branches: [main]
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+  #pull_request:
+    #branches: [main]
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: couchpartygames/match-function
 
 jobs:
-  # define job to build and publish docker image
+
   build-and-push-docker-image:
     name: Build Docker image and push to repositories
     runs-on: ubuntu-latest
@@ -60,6 +60,7 @@ jobs:
           # relative path to the place where source code with Dockerfile is located
           context: ./src/MatchFunction
           tags: ${{ steps.meta.outputs.tags }}
+          labels: org.opencontainers.image.source="https://github.com/couchpartygames/open-match-components"
           push: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
