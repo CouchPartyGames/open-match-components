@@ -5,17 +5,14 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DB7594DE-E341-4DE3-ADC8-0D4FFDA5AEF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameFrontend", "src\GameFrontend\GameFrontend.csproj", "{6047C9A8-BDEB-43E0-900A-21FDE2A23D09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameFrontend", "src\GameFrontend\GameFrontend.csproj", "{6047C9A8-BDEB-43E0-900A-21FDE2A23D09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchFunction", "src\MatchFunction\MatchFunction.csproj", "{E2C22975-5B20-4B23-AC26-104C4996AA88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchFunction", "src\MatchFunction\MatchFunction.csproj", "{E2C22975-5B20-4B23-AC26-104C4996AA88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6047C9A8-BDEB-43E0-900A-21FDE2A23D09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -27,8 +24,14 @@ Global
 		{E2C22975-5B20-4B23-AC26-104C4996AA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2C22975-5B20-4B23-AC26-104C4996AA88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6047C9A8-BDEB-43E0-900A-21FDE2A23D09} = {DB7594DE-E341-4DE3-ADC8-0D4FFDA5AEF9}
 		{E2C22975-5B20-4B23-AC26-104C4996AA88} = {DB7594DE-E341-4DE3-ADC8-0D4FFDA5AEF9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98800C8F-6DF8-47A5-B687-0273C38955BD}
 	EndGlobalSection
 EndGlobal
