@@ -1,24 +1,63 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
-    <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.53.0" />
-    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.53.0" />
+    <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.54.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.54.0" />
     <PackageReference Include="Grpc.Tools" Version="2.54.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="7.0.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.3.5" />
-    <PackageReference Include="OpenMatch.Api" Version="1.7.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.3.7" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Protobuf Include="Protos\api\backend.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\api\evaluator.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\api\extensions.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\api\frontend.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\api\matchfunction.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\api\messages.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\api\query.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\auth.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\backend.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\billing.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\client.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\config_change.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\consumer.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\context.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\control.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\distribution.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\documentation.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\endpoint.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\field_behavior.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\httpbody.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\label.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\launch_stage.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\log.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\logging.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\metric.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\monitored_resource.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\monitoring.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\quota.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\resource.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\service.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\source_info.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\system_parameter.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\usage.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\rpc\code.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\rpc\error_details.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\rpc\status.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\protoc-gen-openapiv2\options\annotations.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\protoc-gen-openapiv2\options\openapiv2.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Protos\google\api\annotations.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <None Update="Protos\google\api\http.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+  </ItemGroup>
 </Project>

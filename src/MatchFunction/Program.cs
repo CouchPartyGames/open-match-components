@@ -5,14 +5,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddGrpcService()
-    .AddSwaggerService()
-    .AddHealthChecksService();
-
+    .AddHealthChecksService() 
+    .AddSwaggerService();     //triggers Unhandled exception. System.InvalidOperationException: Error binding gRPC service 'MatchFunctionRunService'
 
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment()) {
+    app.MapGrpcReflectionService();
     app.UseSwagger();
 	app.UseSwaggerUI(c => {
     	c.SwaggerEndpoint("/swagger/v1/swagger.json", "MatchFunction V1");
@@ -21,7 +21,7 @@ if (app.Environment.IsDevelopment()) {
 
 
 // Configure the HTTP request pipeline.
-app.MapGrpcReflectionService();
+//app.MapGrpcReflectionService();
 
 // Services
 app.MapGrpcService<MatchFunctionRunService>();
