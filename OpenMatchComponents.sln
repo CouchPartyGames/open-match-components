@@ -9,6 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameFrontend", "src\GameFro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchFunction", "src\MatchFunction\MatchFunction.csproj", "{E2C22975-5B20-4B23-AC26-104C4996AA88}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FF5AB689-8608-4AD7-B372-9C6639469B05}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Director", "src\Director\Director.csproj", "{A206D049-B465-4251-9A41-07B57BD004E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +30,10 @@ Global
 		{E2C22975-5B20-4B23-AC26-104C4996AA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2C22975-5B20-4B23-AC26-104C4996AA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2C22975-5B20-4B23-AC26-104C4996AA88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A206D049-B465-4251-9A41-07B57BD004E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A206D049-B465-4251-9A41-07B57BD004E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A206D049-B465-4251-9A41-07B57BD004E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A206D049-B465-4251-9A41-07B57BD004E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +41,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6047C9A8-BDEB-43E0-900A-21FDE2A23D09} = {DB7594DE-E341-4DE3-ADC8-0D4FFDA5AEF9}
 		{E2C22975-5B20-4B23-AC26-104C4996AA88} = {DB7594DE-E341-4DE3-ADC8-0D4FFDA5AEF9}
+		{A206D049-B465-4251-9A41-07B57BD004E9} = {DB7594DE-E341-4DE3-ADC8-0D4FFDA5AEF9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98800C8F-6DF8-47A5-B687-0273C38955BD}
