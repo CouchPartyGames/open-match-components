@@ -4,7 +4,6 @@ public static class ServiceCollections
 {
     public static IServiceCollection AddGrpcService(this IServiceCollection services)
     {
-        //services.AddGrpc()
         services.AddGrpc().AddJsonTranscoding();
         services.AddGrpcReflection();
 
@@ -27,8 +26,20 @@ public static class ServiceCollections
         {
             c.SwaggerDoc("v1",
                 new OpenApiInfo { 
-                    Title = "MatchFunction", 
-                    Version = "v1" 
+                    Version = "v1",
+                    Title = "OpenMatch - MatchFunction API",
+                    Description = "Core matchmaking logic implemented as a services",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Contact",
+                        Url = new Uri("https://github.com/CouchPartyGames/open-match-components/issues/new")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "License",
+                        Url = new Uri("https://github.com/CouchPartyGames/open-match-components/blob/main/LICENSE")
+                    }
                 });
 
             //var filePath = Path.Combine(System.AppContext.BaseDirectory, "Server.xml");

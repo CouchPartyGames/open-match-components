@@ -1,7 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -14,33 +13,37 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-var frontend = "open-match-frontend.open-match.svc.cluster.local:50504";
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
-
+app.MapPost("/v1/tickets", () => "hello");
+app.MapGet("/v1/tickets", () => "hello");
+app.MapGet("/v1/tickets/{id}", () => "hello");
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+
+public class Data
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    public string FrontendAddress { get; set; } = "";
+
+    public async void Create()
+    {
+ 
+        using var channel = GrpcChannel.ForAddress(FrontendAddress);
+
+        var frontendClient = new OpenMatch.FrontendService.FrontendServiceClient(channel);
+
+        // Create Ticket
+        var ticket = new Ticket();
+        //ticket.Extensions.Values = new Google.Protobuf.Collections.MapField<string, Google.Protobuf.WellKnownTypes.Any>();
+        //ticket.SearchFields;
+
+        // Create
+        var createRequest = new CreateTicketRequest();
+        createRequest.Ticket = ticket;
+        await frontendClient.CreateTicketAsync(createRequest);
+
+            // Delete
+        var deleteRequest = new DeleteTicketRequest();
+        deleteRequest.TicketId = "myticket";
+        await frontendClient.DeleteTicketAsync(deleteRequest);
+    }
 }
