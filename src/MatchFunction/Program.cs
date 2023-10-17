@@ -1,6 +1,7 @@
 using MatchFunction.Services;
 using MatchFunction.Configurations;
 
+//var builder = WebApplication.CreateSlimBuilder(args);	 // .net 8 + AOT
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
@@ -10,7 +11,6 @@ builder.Services
 
 
 var app = builder.Build();
-
 if (app.Environment.IsDevelopment()) {
     app.MapGrpcReflectionService();
     app.UseSwagger();
