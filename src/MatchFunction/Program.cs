@@ -19,7 +19,6 @@ if (app.Environment.IsDevelopment()) {
 	});
 }
 
-
 // Services
 app.MapGrpcService<MatchFunctionRunService>();
 app.MapGrpcHealthChecksService();
