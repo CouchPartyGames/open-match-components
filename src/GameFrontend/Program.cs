@@ -15,8 +15,9 @@ if (app.Environment.IsDevelopment())
 
 
 app.MapPost("/v1/tickets", () => "hello");
-app.MapGet("/v1/tickets", () => "hello");
 app.MapGet("/v1/tickets/{id}", () => "hello");
+app.MapDelete("/v1/tickets/{id}", () => "hello");
+
 app.Run();
 
 
@@ -24,11 +25,9 @@ public class Data
 {
     public string FrontendAddress { get; set; } = "";
 
-    public async void Create()
-    {
+    public async void Create() {
  
         using var channel = GrpcChannel.ForAddress(FrontendAddress);
-
         var frontendClient = new OpenMatch.FrontendService.FrontendServiceClient(channel);
 
         // Create Ticket
@@ -46,4 +45,17 @@ public class Data
         deleteRequest.TicketId = "myticket";
         await frontendClient.DeleteTicketAsync(deleteRequest);
     }
+}
+
+
+public record CreateTicketCommand() {
+
+}
+
+public record GetTicketRequest(Guid Id) {
+
+}
+
+public record DeleteTicketCommand(Guid Id) {
+
 }
