@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
-
-namespace MatchFunction.Services;
+﻿namespace MatchFunction.Services;
 
 using OpenMatch;
+using MatchFunction.OM.Responses;
 
 public class MatchFunctionRunService : MatchFunction.MatchFunctionBase {
 
@@ -18,8 +17,11 @@ public class MatchFunctionRunService : MatchFunction.MatchFunctionBase {
 		RepeatedField<Pool> pools = new();
 
 
+			// Get Proposals (matches)
 		var matches = GetMatches();
+		
 		foreach (var match in matches) {
+				// Respond with Proposals
 	        var response = new RunResponseBuilder()
 		        .WithMatch(match)
 		        .Build();
@@ -38,22 +40,4 @@ public class MatchFunctionRunService : MatchFunction.MatchFunctionBase {
 			}
 	    };
     }
-}
-
-public class RunResponseBuilder
-{
-	private Match match = new();
-
-	public RunResponseBuilder WithMatch(Match match) {
-		this.match = match;
-		return this;
-	}
-
-	public RunResponse Build()
-	{
-		return new RunResponse
-		{
-			Proposal = match
-		};
-	}
 }
