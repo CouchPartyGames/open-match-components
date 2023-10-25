@@ -51,6 +51,7 @@
     <Protobuf Include="Protos\third_party\protoc-gen-openapiv2\options\openapiv2.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos;Protos\third_party" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AgonesSDK" Version="1.35.0" />
     <PackageReference Include="Google.Protobuf" Version="3.23.3" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
     <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.54.0" />
