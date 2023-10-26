@@ -1,4 +1,4 @@
-﻿using Agones;
+﻿using Director2.OpenMatch;
 
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
@@ -11,52 +11,51 @@ var allocationEndpoint = "localhost:5322";
 
     // Connect to Allocation Service
 using var allocateChannel = GrpcChannel.ForAddress(allocationEndpoint);
-var agonesSdk = new SDK.SDKClient(allocateChannel);
-var agones = new AgonesSDK(15, agonesSdk);
-var connected = agones.ConnectAsync();
-var response = await agones.AllocateAsync();
 
     // Connect to Backend Service
-using var channel = GrpcChannel.ForAddress(backendEndpoint);
+var options = new GrpcChannelOptions();
+using var channel = GrpcChannel.ForAddress(backendEndpoint, options);
 var backendClient = new BackendService.BackendServiceClient(channel);
 
-//var profiles = ProfileList();
-
-    // Allocation
-
-    // Assign
-var request = new AssignTicketsRequest();
-var reponse = await backendClient.AssignTicketsAsync(request);
+var builder = new Profiles();
+var profiles = builder.GenerateProfiles();
 
 
-public class GenerateProfiles
-{
-    private List<string> Modes = new List<string>() { "mode.demo", "mode.ctf", "mode.battleroyale" };
-
+foreach (var profile in profiles)
+{ 
+        // Fetch Matches
     /*
-    public Pool CreatePool()
-    {
-        return new Pool
-        {
-            Name = "pool",
-            TagPresentFilters =
-            {
-                "Tag"
-            }
-        }
-    }
+    request = new Fetch.RequestBuilder()
+        .WithMatchProfile(profile)
+        //.WithFunctionConfig()
+        .Build();
+    
+    var fetch = new Fetch();
+    fetch.FetchTickets(backendClient, request);
+    */
 
-    public MatchProfile CreateProfile()
-    {
-       return new MatchProfile
-       {
-           Name = "test",
-           Pools = new RepeatedField<Pool>()
-           {
-               
-           }
-       } 
-    }*/
+        // Allocation
+        /*
+    var request = new Allocation.RequestBuilder()
+        .WithNamespace("default")
+        .WithMetadata()
+        .WithGameSelectors()
+        .WithMultiCluster().Build();
+        
+    var allocate = new Allocation();
+    allocate.AllocateGameServer(allocateClient, request);
+        */
+    
+        // Assignment
+        /*
+    var request = new Assign.RequestBuilder()
+        .WithAssignmentGroup()
+        .Build();
+
+    var assign = new Assign();
+    assign.AssignTickets(backendClient, request);
+    */
 }
+
 
 

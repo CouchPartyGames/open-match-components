@@ -19,8 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Agones\" />
-    <Folder Include="OpenMatch\" />
+    <Folder Include="Protos\" />
   </ItemGroup>
 
 </Project>
