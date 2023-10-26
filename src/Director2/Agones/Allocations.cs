@@ -2,7 +2,7 @@ namespace Director2.Agones;
 
 using Allocation;
 
-public class ServerAllocations
+public sealed class ServerAllocations
 {
 
     public bool Allocate()

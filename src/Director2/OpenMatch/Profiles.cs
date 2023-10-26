@@ -1,6 +1,6 @@
 namespace Director2.OpenMatch;
 
-public class Profiles
+public sealed class Profiles
 {
     public List<Mode> Modes { get; } = new() { new Mode("mode.ctf") };
     
@@ -10,12 +10,21 @@ public class Profiles
         foreach(var mode in Modes)
         {
 
-            //Pool pool = new PoolBuilder().WithName().AddTags().AddStringFilters().AddRangeFilters().Build();
+            var poolName = $"pool_{mode.Value}";
+            
+            /*
+            Pool pool = new PoolBuilder()
+                .WithName(poolName)
+                .AddTags()
+                .AddStringFilters()
+                .AddRangeFilters()
+                .Build();
+                */
             
             //mode.Value;
             Pool pool = new Pool
             {
-                Name = $"pool_{mode.Value}",
+                Name = poolName,
                 TagPresentFilters = { },
                 StringEqualsFilters = { }
             };
@@ -32,40 +41,53 @@ public class Profiles
 
     public class PoolBuilder
     {
-        private string _name = "default";
+        private Pool _pool = new();
         
         public PoolBuilder WithName(string name)
         {
-             _name = name;
+             _pool.Name = name;
              return this;
         }
 
-        public PoolBuilder AddTags()
+        public PoolBuilder AddTags(TagFilter filter)
         {
-            return this;
-        }
-
-        public PoolBuilder AddStringFilters()
-        {
-            return this;
-        }
-
-        public PoolBuilder AddRangeFilters()
-        {
-            return this;
-        }
-
-        public Pool Build()
-        {
-            return new Pool
+            _pool.TagPresentFilters.Add(new TagPresentFilter
             {
-                Name = _name,
-                DoubleRangeFilters = {  },
-                StringEqualsFilters = {  },
-                TagPresentFilters = {  }
-            };
+                Tag = filter.Value
+            });
+            return this;
         }
+
+        public PoolBuilder AddStringFilters(StringFilter filter)
+        {
+            _pool.StringEqualsFilters.Add(new StringEqualsFilter
+            {
+                StringArg = filter.Key,
+                Value = filter.Value
+            });
+            return this;
+        }
+
+        public PoolBuilder AddRangeFilters(DoubleFilter filter)
+        {
+            _pool.DoubleRangeFilters.Add(new DoubleRangeFilter 
+            {
+                DoubleArg = filter.Name,
+                Min = filter.Min,
+                Max = filter.Max
+            });
+            return this;
+        }
+
+        public Pool Build() => _pool;
     }
+
+
+    public sealed record DoubleFilter(string Name, double Min, double Max);
+        
+    public sealed record StringFilter(string Key, string Value);
     
-    public record Mode(string Value);
+    public sealed record TagFilter(string Value);
+    
+    public sealed record Mode(string Value);
 }

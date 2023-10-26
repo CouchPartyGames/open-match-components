@@ -1,15 +1,22 @@
 ﻿using Director2.OpenMatch;
+using Director2.Agones;
 
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
 
 
 var backendEndpoint = "open-match-backend.open-match.svc.cluster.local:50505";
-var matchFunctionEndpoint = "mm102-tutorial-matchfunction.mm102-tutorial.svc.cluster.local";
 var allocationEndpoint = "localhost:5322";
+
+var matchFunctionHost = "mm102-tutorial-matchfunction.mm102-tutorial.svc.cluster.local";
+var matchFunctionPort = 5555;
+var matchFunctionGrpc = true;
 
     // Connect to Allocation Service
 using var allocateChannel = GrpcChannel.ForAddress(allocationEndpoint);
+
+    // MatchMaker Function to use
+var funcConfig = Matches.CreateFunctionConfig(matchFunctionHost, matchFunctionPort, matchFunctionGrpc);
 
     // Connect to Backend Service
 var options = new GrpcChannelOptions();
@@ -18,6 +25,7 @@ var backendClient = new BackendService.BackendServiceClient(channel);
 
     // Create Profiles
 var fetcher = new Matches();
+
 var builder = new Profiles();
 var profiles = builder.GenerateProfiles();
 
@@ -26,12 +34,12 @@ foreach (var profile in profiles)
 { 
         // Fetch Matches
     /*
+    var funcConfig = Matches.CreateFunctionConfig(matchFunctionHost, matchFunctionPort, matchFunctionGrpc);
     request = new Fetch.RequestBuilder()
         .WithMatchProfile(profile)
-        //.WithFunctionConfig()
+        .WithFunctionConfig(funcConfig)
         .Build();
     
-    var fetch = new Fetch();
     fetch.FetchTickets(backendClient, request);
     */
 
@@ -57,6 +65,3 @@ foreach (var profile in profiles)
     assign.AssignTickets(backendClient, request);
     */
 }
-
-
-
