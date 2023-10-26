@@ -1,24 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.24.4" />
     <PackageReference Include="Grpc.Net.Client" Version="2.58.0" />
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.32.0" />
     <PackageReference Include="Grpc.Tools" Version="2.59.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="OpenMatch.Api" Version="1.7.0" />
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="Protos\" />
+    <Protobuf Include="Protos\allocation\allocation.proto" GrpcServices="Both" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\annotations.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\client.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\field_behavior.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\http.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\launch_stage.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\google\api\resource.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\protoc-gen-openapiv2\options\annotations.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\protoc-gen-openapiv2\options\openapiv2.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\sdk\sdk.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
   </ItemGroup>
-
 </Project>

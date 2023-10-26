@@ -1,6 +1,7 @@
 namespace Director2.OpenMatch;
 
-public class Allocation
+
+public class Allocations
 {
     public bool AllocateGameServer()
     {
