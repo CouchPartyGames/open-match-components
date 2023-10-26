@@ -9,6 +9,9 @@ public class Profiles
         var profiles = new RepeatedField<MatchProfile>();
         foreach(var mode in Modes)
         {
+
+            //Pool pool = new PoolBuilder().WithName().AddTags().AddStringFilters().AddRangeFilters().Build();
+            
             //mode.Value;
             Pool pool = new Pool
             {
@@ -27,9 +30,41 @@ public class Profiles
         return profiles;
     }
 
-    public Pool CreatePool()
+    public class PoolBuilder
     {
-        return new Pool();
+        private string _name = "default";
+        
+        public PoolBuilder WithName(string name)
+        {
+             _name = name;
+             return this;
+        }
+
+        public PoolBuilder AddTags()
+        {
+            return this;
+        }
+
+        public PoolBuilder AddStringFilters()
+        {
+            return this;
+        }
+
+        public PoolBuilder AddRangeFilters()
+        {
+            return this;
+        }
+
+        public Pool Build()
+        {
+            return new Pool
+            {
+                Name = _name,
+                DoubleRangeFilters = {  },
+                StringEqualsFilters = {  },
+                TagPresentFilters = {  }
+            };
+        }
     }
     
     public record Mode(string Value);

@@ -1,17 +1,19 @@
-namespace Director2.OpenMatch;
+namespace Director2.Agones;
 
+using Allocation;
 
-public class Allocations
+public class ServerAllocations
 {
-    public bool AllocateGameServer()
+
+    public bool Allocate()
     {
         return true;
     }
     
-    
     public class RequestBuilder
     {
-        public string _namespace = "default";
+        private string _namespace = "default";
+        private bool _multiCluster = false;
             
         public RequestBuilder WithNamespace(string ns) {
             _namespace = ns;
@@ -26,15 +28,20 @@ public class Allocations
             return this;
         }
 
-        public RequestBuilder WithMultiCluster(bool multi) {
+        public RequestBuilder WithMultiCluster(bool isEnabled)
+        {
+            _multiCluster = isEnabled;
             return this;
         }
 
-        /*
+        
         public AllocationRequest Build() {
             return new AllocationRequest {
-                Namespace = namespace
+                Namespace = _namespace,
+                Metadata = {},
+                GameServerSelectors = {  },
+                MultiClusterSetting = {}
             };
-        }*/
+        }
     }
 }

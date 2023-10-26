@@ -1,8 +1,8 @@
 namespace Director2.OpenMatch;
 
-public class Fetch
+public class Matches
 {
-    public bool FetchTickets(BackendService.BackendServiceClient client, FetchMatchesRequest request)
+    public bool Fetch(BackendService.BackendServiceClient client, FetchMatchesRequest request)
     {
         var response = client.FetchMatches(request);
         return true;
@@ -10,8 +10,8 @@ public class Fetch
 
     public class RequestBuilder
     {
-        private MatchProfile _profile;
-        private FunctionConfig _config;
+        private MatchProfile _profile = new();
+        private FunctionConfig _config = new();
 
         public RequestBuilder WithMatchProfile(MatchProfile profile)
         {

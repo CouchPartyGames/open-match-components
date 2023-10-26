@@ -17,6 +17,7 @@ using var channel = GrpcChannel.ForAddress(backendEndpoint, options);
 var backendClient = new BackendService.BackendServiceClient(channel);
 
     // Create Profiles
+var fetcher = new Matches();
 var builder = new Profiles();
 var profiles = builder.GenerateProfiles();
 
@@ -42,7 +43,7 @@ foreach (var profile in profiles)
         .WithGameSelectors()
         .WithMultiCluster().Build();
         
-    var allocate = new Allocation();
+    var allocate = new Allocations();
     allocate.AllocateGameServer(allocateClient, request);
         */
     
