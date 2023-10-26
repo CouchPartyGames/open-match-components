@@ -8,7 +8,6 @@ var backendEndpoint = "open-match-backend.open-match.svc.cluster.local:50505";
 var matchFunctionEndpoint = "mm102-tutorial-matchfunction.mm102-tutorial.svc.cluster.local";
 var allocationEndpoint = "localhost:5322";
 
-
     // Connect to Allocation Service
 using var allocateChannel = GrpcChannel.ForAddress(allocationEndpoint);
 
@@ -17,6 +16,7 @@ var options = new GrpcChannelOptions();
 using var channel = GrpcChannel.ForAddress(backendEndpoint, options);
 var backendClient = new BackendService.BackendServiceClient(channel);
 
+    // Create Profiles
 var builder = new Profiles();
 var profiles = builder.GenerateProfiles();
 
