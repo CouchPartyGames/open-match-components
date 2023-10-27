@@ -31,7 +31,6 @@ public class Data
         var frontendClient = new OpenMatch.FrontendService.FrontendServiceClient(channel);
 
         // Create Ticket
-        var ticket = new Ticket();
         //ticket.Extensions.Values = new Google.Protobuf.Collections.MapField<string, Google.Protobuf.WellKnownTypes.Any>();
         //ticket.SearchFields;
 
@@ -45,17 +44,4 @@ public class Data
         deleteRequest.TicketId = "myticket";
         await frontendClient.DeleteTicketAsync(deleteRequest);
     }
-}
-
-
-public record CreateTicketCommand() {
-
-}
-
-public record GetTicketRequest(Guid Id) {
-
-}
-
-public record DeleteTicketCommand(Guid Id) {
-
 }
