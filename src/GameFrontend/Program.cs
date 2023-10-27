@@ -21,27 +21,3 @@ app.MapDelete("/v1/tickets/{id}", () => "hello");
 app.Run();
 
 
-public class Data
-{
-    public string FrontendAddress { get; set; } = "";
-
-    public async void Create() {
- 
-        using var channel = GrpcChannel.ForAddress(FrontendAddress);
-        var frontendClient = new OpenMatch.FrontendService.FrontendServiceClient(channel);
-
-        // Create Ticket
-        //ticket.Extensions.Values = new Google.Protobuf.Collections.MapField<string, Google.Protobuf.WellKnownTypes.Any>();
-        //ticket.SearchFields;
-
-        // Create
-        var createRequest = new CreateTicketRequest();
-        createRequest.Ticket = ticket;
-        await frontendClient.CreateTicketAsync(createRequest);
-
-            // Delete
-        var deleteRequest = new DeleteTicketRequest();
-        deleteRequest.TicketId = "myticket";
-        await frontendClient.DeleteTicketAsync(deleteRequest);
-    }
-}

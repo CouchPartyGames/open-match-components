@@ -1,8 +1,8 @@
 using MatchFunction.Services;
 using MatchFunction.Configurations;
 
-//var builder = WebApplication.CreateSlimBuilder(args);	 // .net 8 + AOT
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateSlimBuilder(args);	 // .net 8 + AOT
+//var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddGrpcService()

@@ -1,7 +1,7 @@
 namespace MatchFunction.OM;
 
     // https://openmatch.dev/site/docs/reference/api/#searchfields
-public sealed record TagField(string Value);
+public sealed record Create(string Value);
 
     // https://openmatch.dev/site/docs/reference/api/#searchfieldsstringargsentry
 public sealed record KeyValueField(string Key, string Value);
