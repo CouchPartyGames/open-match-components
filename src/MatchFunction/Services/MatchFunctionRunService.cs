@@ -3,7 +3,11 @@
 using OpenMatch;
 using MatchFunction.OM;
 
-public class MatchFunctionRunService : MatchFunction.MatchFunctionBase {
+public class MatchFunctionRunService : MatchFunction.MatchFunctionBase
+{
+
+	private readonly QueryService.QueryServiceClient _queryClient;
+	public MatchFunctionRunService(QueryService.QueryServiceClient client) => _queryClient = client;
 
     public override async Task Run(RunRequest request, IServerStreamWriter<RunResponse> responseStream, ServerCallContext context)
     {
@@ -12,21 +16,32 @@ public class MatchFunctionRunService : MatchFunction.MatchFunctionBase {
 	    request.Profile.Pools;
 	    request.Profile.Extensions;
 	    */
-	    
-		RepeatedField<Pool> pools = new();
 
+	    QueryTicketsRequest queryRequest = new Query.RequestBuilder()
+		    .WithPools(new Pool())
+		    .Build();
 
-			// Get Proposals (matches)
-		var matches = GetMatches(request.Profile);
-		
-		foreach (var match in matches) {
-				// Respond with Proposals
-	        var response = new Matches.ResponseBuilder()
-		        .WithMatch(match)
-		        .Build();
+			// https://openmatch.dev/site/docs/reference/api/#queryservice
+	    using var call = _queryClient.QueryTickets(queryRequest);
 
-	        await responseStream.WriteAsync(response);
-        }
+	    while(await call.ResponseStream.MoveNext())
+	    {
+		    //call.ResponseStream.Current.Tickets;
+		    
+				 // Get Proposals (matches)
+			var matches = GetMatches(request.Profile);
+			
+			foreach (var match in matches) {
+					 // Respond with Proposals
+				var response = new Matches.ResponseBuilder()
+					.WithMatch(match)
+					.Build();
+
+				await responseStream.WriteAsync(response);
+			}
+		    
+	    }
+
     }
 
     // https://openmatch.dev/site/docs/reference/api/#openmatch-MatchProfile

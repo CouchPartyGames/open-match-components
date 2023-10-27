@@ -10,7 +10,8 @@
     <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
     <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.54.0" />
     <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.54.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.54.0">
+    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.59.0-pre1" />
+    <PackageReference Include="Grpc.Tools" Version="2.59.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -21,10 +22,10 @@
     <Protobuf Include="Protos\api\backend.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
     <Protobuf Include="Protos\api\evaluator.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
     <Protobuf Include="Protos\api\extensions.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
-    <Protobuf Include="Protos\api\frontend.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
-    <Protobuf Include="Protos\api\matchfunction.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
-    <Protobuf Include="Protos\api\messages.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
-    <Protobuf Include="Protos\api\query.proto" GrpcServices="Server" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\api\frontend.proto" GrpcServices="Both" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\api\matchfunction.proto" GrpcServices="Both" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\api\messages.proto" GrpcServices="Both" AdditionalImportDirs="Protos" />
+    <Protobuf Include="Protos\api\query.proto" GrpcServices="Both" AdditionalImportDirs="Protos" />
     <Protobuf Include="Protos\google\api\auth.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
     <Protobuf Include="Protos\google\api\backend.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
     <Protobuf Include="Protos\google\api\billing.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
