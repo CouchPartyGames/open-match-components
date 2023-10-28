@@ -1,5 +1,12 @@
 ﻿using Director2.OpenMatch;
 using Director2.Agones;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+
+using IHost host = Host.CreateApplicationBuilder(args).Build();
+IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
 
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
@@ -13,15 +20,17 @@ var matchFunctionPort = 5555;
 var matchFunctionGrpc = true;
 
     // Connect to Allocation Service
-using var allocateChannel = GrpcChannel.ForAddress(allocationEndpoint);
+//using var allocateChannel = GrpcChannel.ForAddress(allocationEndpoint);
 
     // MatchMaker Function to use
 var funcConfig = Matches.CreateFunctionConfig(matchFunctionHost, matchFunctionPort, matchFunctionGrpc);
 
     // Connect to Backend Service
+/*
 var options = new GrpcChannelOptions();
 using var channel = GrpcChannel.ForAddress(backendEndpoint, options);
 var backendClient = new BackendService.BackendServiceClient(channel);
+*/
 
     // Create Profiles
 var fetcher = new Matches();
@@ -32,6 +41,7 @@ var profiles = builder.GenerateProfiles();
 
 foreach (var profile in profiles)
 { 
+    Console.WriteLine(profile);
         // Fetch Matches
     /*
     var funcConfig = Matches.CreateFunctionConfig(matchFunctionHost, matchFunctionPort, matchFunctionGrpc);
