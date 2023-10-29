@@ -1,18 +1,31 @@
 ﻿using Director2.OpenMatch;
 using Director2.Agones;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+var host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices((context, services) =>
+    {
+        services.AddGrpcClient<QueryService.QueryServiceClient>("OpenMatchQuery", o => 
+        {
+            var address = context.Configuration["OPENMATCH_QUERY_HOST"] ?? "https://open-match-query.open-match.svc.cluster.local:50503";
+            o.Address = new Uri(address);
+        });
 
-using IHost host = Host.CreateApplicationBuilder(args).Build();
-IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
+        services.AddGrpcClient<BackendService.BackendServiceClient>("OpenMatchBackend", o =>
+        {
+            var address = context.Configuration["OPENMATCH_BACKEND_HOST"] ??
+                          "https://open-match-backend.open-match.svc.cluster.local:50505";
+            o.Address = new Uri(address);
+        });
+    })
+    .Build();
+
 
 // See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
 
 
-var backendEndpoint = "open-match-backend.open-match.svc.cluster.local:50505";
 var allocationEndpoint = "localhost:5322";
 
 var matchFunctionHost = "mm102-tutorial-matchfunction.mm102-tutorial.svc.cluster.local";
