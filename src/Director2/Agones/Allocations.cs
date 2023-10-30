@@ -44,4 +44,7 @@ public sealed class ServerAllocations
             };
         }
     }
+
+
+    public sealed record AllocationEndpoint(string Address);
 }

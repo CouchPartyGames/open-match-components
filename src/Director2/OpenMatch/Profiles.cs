@@ -1,7 +1,24 @@
 namespace Director2.OpenMatch;
 
+public interface IMode
+{
+    List<Profiles.Mode> Modes { get; }
+}
+
+public sealed class DefaultModes : IMode
+{
+    public List<Profiles.Mode> Modes { get; } = new()
+    {
+        new Profiles.Mode("mode.ctf"),
+        new Profiles.Mode("mode.tournament")
+    };
+}
+
 public sealed class Profiles
 {
+    private IMode _mode;
+    public Profiles(IMode mode) => _mode = mode;
+    
     public List<Mode> Modes { get; } = new() { new Mode("mode.ctf") };
     
     public RepeatedField<MatchProfile> GenerateProfiles()

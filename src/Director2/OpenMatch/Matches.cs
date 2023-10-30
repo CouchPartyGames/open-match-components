@@ -1,10 +1,10 @@
 namespace Director2.OpenMatch;
 
-public sealed class Matches
+public sealed class FetchMatches(BackendService.BackendServiceClient _client)
 {
     public bool Fetch(BackendService.BackendServiceClient client, FetchMatchesRequest request)
     {
-        var response = client.FetchMatches(request);
+        var response = _client.FetchMatches(request);
         return true;
     }
 

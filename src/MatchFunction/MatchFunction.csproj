@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PublishAot>false</PublishAot>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
@@ -61,5 +62,10 @@
   <ItemGroup>
     <None Update="Protos\google\api\annotations.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
     <None Update="Protos\google\api\http.proto" GrpcServices="None" Access="Internal" AdditionalImportDirs="Protos" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
   </ItemGroup>
 </Project>
