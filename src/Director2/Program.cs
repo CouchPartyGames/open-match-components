@@ -7,9 +7,10 @@ using Microsoft.Extensions.Http.Resilience;
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
-        services.AddGrpcClient<QueryService.QueryServiceClient>("OpenMatchQuery", o => 
+        services.AddGrpcClient<QueryService.QueryServiceClient>("OpenMatchQuery", o =>
         {
-            var address = context.Configuration["OPENMATCH_QUERY_HOST"] ?? "https://open-match-query.open-match.svc.cluster.local:50503";
+            var address = context.Configuration["OPENMATCH_QUERY_HOST"] ??
+                          "https://open-match-query.open-match.svc.cluster.local:50503";
             o.Address = new Uri(address);
         }).AddStandardResilienceHandler();
 
