@@ -1,9 +1,10 @@
-var builder = WebApplication.CreateBuilder(args);
+using GameFrontend.OpenMatch;
 
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddGrpcClient<FrontendService.FrontendServiceClient>("OpenMatchFrontend", o => 
+builder.Services.AddGrpcClient<FrontendService.FrontendServiceClient>(Constants.OpenMatchFrontend, o => 
 {
     //Configuration["OPENMATCH_FRONTEND_HOST"]
     var address = "https://open-match-frontend.open-match.svc.cluster.local:50503";
@@ -24,5 +25,3 @@ app.MapGet("/v1/tickets/{id}", () => "hello");
 app.MapDelete("/v1/tickets/{id}", () => "hello");
 
 app.Run();
-
-

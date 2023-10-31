@@ -1,9 +1,13 @@
-using MatchFunction.OM;
-
 namespace GameFrontend.OpenMatch;
 
 public sealed class CreateTicket
 {
+    private FrontendService.FrontendServiceClient _client;
+
+    public CreateTicket(GrpcClientFactory factory)
+    {
+        _client = factory.CreateClient<FrontendService.FrontendServiceClient>(Constants.OpenMatchFrontend);
+    }
     
     public sealed class RequestBuilder
     {
