@@ -2,6 +2,7 @@
 using Director2.Agones;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Http.Resilience;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
@@ -10,14 +11,14 @@ var host = Host.CreateDefaultBuilder(args)
         {
             var address = context.Configuration["OPENMATCH_QUERY_HOST"] ?? "https://open-match-query.open-match.svc.cluster.local:50503";
             o.Address = new Uri(address);
-        });
+        }).AddStandardResilienceHandler();
 
         services.AddGrpcClient<BackendService.BackendServiceClient>("OpenMatchBackend", o =>
         {
             var address = context.Configuration["OPENMATCH_BACKEND_HOST"] ??
                           "https://open-match-backend.open-match.svc.cluster.local:50505";
             o.Address = new Uri(address);
-        });
+        }).AddStandardResilienceHandler();
         
         //context.Configuration["ALLOCATION"]
     })

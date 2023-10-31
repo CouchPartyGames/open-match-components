@@ -1,6 +1,7 @@
 using MatchFunction.Services;
 using MatchFunction.Configurations;
-using OpenMatch;
+using MatchFunction.OM;
+using Microsoft.Extensions.Http.Resilience;
 
 var builder = WebApplication.CreateSlimBuilder(args);	 // .net 8 + AOT supported
 //var builder = WebApplication.CreateBuilder(args);
@@ -10,12 +11,11 @@ builder.Services
     .AddHealthChecksService() 
     .AddSwaggerService();
 
-builder.Services.AddGrpcClient<QueryService.QueryServiceClient>(o =>
+builder.Services.AddGrpcClient<QueryService.QueryServiceClient>(Constants.OpenMatchQuery, o =>
 {
 	var host = builder.Configuration["QUERY_HOST"] ?? "https://open-match-query.open-match.svc.cluster.local:50503";
 	o.Address = new Uri(host);
-});
-	//.AddStandardResilienceHandler();
+}).AddStandardResilienceHandler();
 
 
 var app = builder.Build();

@@ -1,4 +1,5 @@
 using GameFrontend.OpenMatch;
+using Microsoft.Extensions.Http.Resilience;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,8 @@ builder.Services.AddGrpcClient<FrontendService.FrontendServiceClient>(Constants.
     //Configuration["OPENMATCH_FRONTEND_HOST"]
     var address = "https://open-match-frontend.open-match.svc.cluster.local:50503";
     o.Address = new Uri(address);
-});
+}).AddStandardResilienceHandler();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
