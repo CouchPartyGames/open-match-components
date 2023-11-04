@@ -4,13 +4,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <PublishAot>false</PublishAot>
+    <PublishAot>true</PublishAot>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
     <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.54.0" />
-    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.54.0" />
     <PackageReference Include="Grpc.Net.ClientFactory" Version="2.59.0-pre1" />
     <PackageReference Include="Grpc.Tools" Version="2.59.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

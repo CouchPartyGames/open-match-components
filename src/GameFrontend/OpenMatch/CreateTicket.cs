@@ -8,6 +8,12 @@ public sealed class CreateTicket
     {
         _client = factory.CreateClient<FrontendService.FrontendServiceClient>(Constants.OpenMatchFrontend);
     }
+
+    public async Task<bool> Create(CreateTicketRequest request)
+    {
+        var response = await _client.CreateTicketAsync(request);
+        return true;
+    }
     
     public sealed class RequestBuilder
     {
@@ -24,4 +30,46 @@ public sealed class CreateTicket
             return _request;
         }
     }
+
+    public sealed class CreateTicketBuilder
+    {
+        private Ticket _ticket = new();
+
+        public CreateTicketBuilder AddTag(TagEntry tag)
+        {
+            _ticket.SearchFields.Tags.Add(tag.Value);
+            return this;
+        }
+
+        public CreateTicketBuilder AddDouble(DoubleEntry doubleEntry)
+        {
+            _ticket.SearchFields.DoubleArgs.Add(doubleEntry.Key, doubleEntry.Value);
+            return this;
+        }
+
+        public CreateTicketBuilder AddString(StringEntry stringEntry)
+        {
+            
+            _ticket.SearchFields.StringArgs.Add(stringEntry.Key, stringEntry.Value);
+            return this;
+        }
+
+        public CreateTicketBuilder AddExtension()
+        {
+            return this;
+        }
+        
+        public CreateTicketBuilder AddPersistence()
+        {
+            return this;
+        }
+        
+        public Ticket Build() => _ticket;
+    }
+
+    public sealed record TagEntry(string Value);
+
+    public sealed record DoubleEntry(string Key, double Value);
+
+    public sealed record StringEntry(string Key, string Value);
 }

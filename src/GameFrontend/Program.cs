@@ -1,4 +1,4 @@
-using GameFrontend.OpenMatch;
+using GameFrontend.OpenMatch;using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Http.Resilience;
 using OpenTelemetry.Metrics;
 
@@ -6,12 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddGrpcClient<FrontendService.FrontendServiceClient>(Constants.OpenMatchFrontend, o => 
+builder.Services.AddGrpcClient<FrontendService.FrontendServiceClient>(Constants.OpenMatchFrontend, o =>
 {
-    //Configuration["OPENMATCH_FRONTEND_HOST"]
-    var address = "https://open-match-frontend.open-match.svc.cluster.local:50503";
+    var address = builder.Configuration["OPENMATCH_FRONTEND_HOST"] ??
+                  "http://open-match-frontend.open-match.svc.cluster.local:50504";
     o.Address = new Uri(address);
 }).AddStandardResilienceHandler();
+    
+
+
 builder.Services.AddOpenTelemetry()
     .WithMetrics(x =>
     {
@@ -31,8 +34,35 @@ if (app.Environment.IsDevelopment())
 
 app.MapPrometheusScrapingEndpoint();
 
-app.MapPost("/v1/tickets", () => "hello");
-app.MapGet("/v1/tickets/{id}", () => "hello");
-app.MapDelete("/v1/tickets/{id}", () => "hello");
+app.MapPost("/v1/tickets", CreateTicket);
+app.MapGet("/v1/tickets/{id}", GetTicket);
+app.MapDelete("/v1/tickets/{id}", DeleteTicket);
 
 app.Run();
+
+
+static async Task<IResult> CreateTicket()
+{
+    var ticket = new CreateTicket.CreateTicketBuilder()
+        .AddDouble(new CreateTicket.DoubleEntry("latency", 32.0))
+        .AddDouble(new CreateTicket.DoubleEntry("skill", 3.0))
+        .AddString(new CreateTicket.StringEntry("game", "32432"))
+        .Build();
+    
+    var request = new CreateTicket.RequestBuilder()
+        .WithTicket(ticket)
+        .Build();
+    
+    return TypedResults.Ok();
+}
+
+static async Task<Results<Ok, NotFound>> GetTicket()
+{
+    return TypedResults.Ok();
+}
+
+static async Task<Result<Ok, NotFound>> DeleteTicket()
+{
+    return TypedResults.Ok();
+}
+

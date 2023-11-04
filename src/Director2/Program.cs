@@ -36,12 +36,6 @@ var matchFunctionGrpc = true;
     // Connect to Allocation Service
 //using var allocateChannel = GrpcChannel.ForAddress(allocationEndpoint);
 
-    // Connect to Backend Service
-/*
-var options = new GrpcChannelOptions();
-using var channel = GrpcChannel.ForAddress(backendEndpoint, options);
-var backendClient = new BackendService.BackendServiceClient(channel);
-*/
 
     // Create Profiles
 //var fetcher = new FetchMatches();

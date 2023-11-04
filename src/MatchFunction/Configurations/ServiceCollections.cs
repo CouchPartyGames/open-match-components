@@ -4,7 +4,7 @@ public static class ServiceCollections {
 
     public static IServiceCollection AddGrpcService(this IServiceCollection services) {
         services.AddGrpc().AddJsonTranscoding();
-        services.AddGrpcReflection();
+        //services.AddGrpcReflection();
 
         return services;
     }
