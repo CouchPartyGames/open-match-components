@@ -1,5 +1,5 @@
+using GameFrontend.Endpoints;
 using GameFrontend.OpenMatch;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Http.Resilience;
 using OpenTelemetry.Metrics;
 using Serilog;
@@ -45,36 +45,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseSerilogRequestLogging();
 app.MapPrometheusScrapingEndpoint();
-
-app.MapPost("/v1/tickets", CreateTicket);
-app.MapGet("/v1/tickets/{id}", GetTicket);
-app.MapDelete("/v1/tickets/{id}", DeleteTicket);
+app.MapAuthenticationEndpoints();
+app.MapTicketEndpoints();
 
 app.Run();
-
-
-static async Task<Results<Ok, NotFound>> CreateTicket()
-{
-    var ticket = new CreateTicket.CreateTicketBuilder()
-        .AddDouble(new CreateTicket.DoubleEntry("latency", 32.0))
-        .AddDouble(new CreateTicket.DoubleEntry("skill", 3.0))
-        .AddString(new CreateTicket.StringEntry("game", "32432"))
-        .Build();
-    
-    var request = new CreateTicket.RequestBuilder()
-        .WithTicket(ticket)
-        .Build();
-    
-    return TypedResults.Ok();
-}
-
-static async Task<Results<Ok, NotFound>> GetTicket()
-{
-    return TypedResults.Ok();
-}
-
-static async Task<Results<Ok, NotFound>> DeleteTicket()
-{
-    return TypedResults.Ok();
-}
-

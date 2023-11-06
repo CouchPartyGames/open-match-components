@@ -26,7 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configurations\" />
-    <Folder Include="Endpoints\" />
     <Folder Include="Interceptors\" />
   </ItemGroup>
   <ItemGroup>
