@@ -3,10 +3,18 @@ using MatchFunction.Configurations;
 using MatchFunction.Interceptors;
 using MatchFunction.OM;
 using Microsoft.Extensions.Http.Resilience;
+using Serilog;
+using Serilog.Formatting.Compact;
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console(new CompactJsonFormatter())
+    .CreateLogger();
 
 var builder = WebApplication.CreateSlimBuilder(args);	 // .net 8 + AOT supported
 //var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseSerilog();
+builder.Services.AddHttpContextAccessor();
 builder.Services
 	.AddGrpcService()
 	.AddHealthChecksService();
@@ -34,6 +42,7 @@ if (app.Environment.IsDevelopment()) {
 }
 
 // Services
+app.UseSerilogRequestLogging();
 app.MapGrpcService<MatchFunctionRunService>();
 app.MapGrpcHealthChecksService();
 

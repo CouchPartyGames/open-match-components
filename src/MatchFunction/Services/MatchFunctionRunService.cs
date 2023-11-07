@@ -7,7 +7,11 @@ public class MatchFunctionRunService : MatchFunction.MatchFunctionBase
 {
 
 	private readonly QueryService.QueryServiceClient _queryClient;
-	public MatchFunctionRunService(QueryService.QueryServiceClient client) => _queryClient = client;
+
+	public MatchFunctionRunService(GrpcClientFactory grpcClientFactory)
+	{
+		 _queryClient = grpcClientFactory.CreateClient<QueryService.QueryServiceClient>(Constants.OpenMatchQuery);
+	}
 
     public override async Task Run(RunRequest request, IServerStreamWriter<RunResponse> responseStream, ServerCallContext context)
     {

@@ -16,6 +16,7 @@ builder.Host.UseSerilog();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHealthChecks();
 builder.Services.AddGrpcClient<FrontendService.FrontendServiceClient>(Constants.OpenMatchFrontend, o =>
 {
     var address = builder.Configuration["OPENMATCH_FRONTEND_HOST"] ??
@@ -43,6 +44,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
+app.MapHealthChecks("/health");
 app.UseSerilogRequestLogging();
 app.MapPrometheusScrapingEndpoint();
 app.MapAuthenticationEndpoints();

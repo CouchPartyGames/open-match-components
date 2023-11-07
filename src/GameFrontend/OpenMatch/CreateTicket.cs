@@ -1,3 +1,4 @@
+
 namespace GameFrontend.OpenMatch;
 
 public sealed class CreateTicket
@@ -9,9 +10,14 @@ public sealed class CreateTicket
         _client = factory.CreateClient<FrontendService.FrontendServiceClient>(Constants.OpenMatchFrontend);
     }
 
-    public async Task<bool> Create(CreateTicketRequest request)
+    public async Task<bool> Create(CreateTicketRequest request, Guid guid)
     {
-        var response = await _client.CreateTicketAsync(request);
+        var id = guid.ToString();
+        Metadata metadata = new()
+        {
+            { "CorrelationId", id }
+        };
+        var response = await _client.CreateTicketAsync(request, metadata);
         return true;
     }
     

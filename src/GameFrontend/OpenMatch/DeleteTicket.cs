@@ -10,6 +10,19 @@ public sealed class DeleteTicket
     {
         _client = factory.CreateClient<FrontendService.FrontendServiceClient>(Constants.OpenMatchFrontend);
     }
+
+    public async Task<bool> Delete(TicketId ticketId)
+    {
+        var request = new RequestBuilder()
+            .WithTicketId(ticketId)
+            .Build();
+        var metadata = new Metadata()
+        {
+            { "STuff", "stuff"}
+        };
+        var response = await _client.DeleteTicketAsync(request, metadata);
+        return true;
+    }
     
     public sealed class RequestBuilder
     {

@@ -33,6 +33,7 @@ public static class TicketEndpoints
 
     static async Task<Results<Ok, NotFound>> DeleteTicket()
     {
+        //new DeleteTicket.TicketId()
         return TypedResults.Ok();
     }
 }
