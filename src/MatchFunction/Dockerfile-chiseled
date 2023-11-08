@@ -11,5 +11,5 @@ RUN dotnet publish -a $TARGETARCH --no-restore -c Release -o /publish --sc -v d
 # Final Image
 FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-jammy-chiseled
 WORKDIR /app
-COPY --from=build /publish/GameFrontend ./
-ENTRYPOINT ["./GameFrontend"]
+COPY --from=build /publish/MatchFunction ./
+ENTRYPOINT ["./MatchFunction"]

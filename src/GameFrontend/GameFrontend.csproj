@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <PublishAot>true</PublishAot>
+	<RuntimeIdentifiers>linux-x64;linux-arm64;osx-arm64;</RuntimeIdentifiers>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
