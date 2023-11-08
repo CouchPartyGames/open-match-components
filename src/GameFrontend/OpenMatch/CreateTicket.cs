@@ -5,9 +5,9 @@ public sealed class CreateTicket
 {
     private FrontendService.FrontendServiceClient _client;
 
-    public CreateTicket(GrpcClientFactory factory)
+    public CreateTicket(FrontendService.FrontendServiceClient client)
     {
-        _client = factory.CreateClient<FrontendService.FrontendServiceClient>(Constants.OpenMatchFrontend);
+        _client = client;
     }
 
     public async Task<bool> Create(CreateTicketRequest request, Guid guid)

@@ -10,14 +10,13 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 var builder = WebApplication.CreateSlimBuilder(args);   // .NET 8 + AOT
-//var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
-builder.Services.AddGrpcClient<FrontendService.FrontendServiceClient>(Constants.OpenMatchFrontend, o =>
+builder.Services.AddGrpcClient<FrontendService.FrontendServiceClient>(o =>
 {
     var address = builder.Configuration["OPENMATCH_FRONTEND_HOST"] ??
                   "http://open-match-frontend.open-match.svc.cluster.local:50504";
@@ -36,16 +35,20 @@ builder.Services.AddOpenTelemetry()
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+CancellationTokenSource cancellation = new();
+app.Lifetime.ApplicationStopping.Register(() =>
+{
+    cancellation.Cancel();
+});
 
-app.MapHealthChecks("/health");
 app.UseSerilogRequestLogging();
+app.MapHealthChecks("/health");
 app.MapPrometheusScrapingEndpoint();
 app.MapAuthenticationEndpoints();
 app.MapTicketEndpoints();

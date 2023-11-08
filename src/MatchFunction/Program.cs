@@ -41,7 +41,7 @@ if (app.Environment.IsDevelopment()) {
 	});*/
 }
 
-// Services
+
 app.UseSerilogRequestLogging();
 app.MapGrpcService<MatchFunctionRunService>();
 app.MapGrpcHealthChecksService();

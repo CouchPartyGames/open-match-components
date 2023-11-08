@@ -6,9 +6,9 @@ public sealed class DeleteTicket
 {
     private FrontendService.FrontendServiceClient _client;
 
-    public DeleteTicket(GrpcClientFactory factory)
+    public DeleteTicket(FrontendService.FrontendServiceClient client)
     {
-        _client = factory.CreateClient<FrontendService.FrontendServiceClient>(Constants.OpenMatchFrontend);
+        _client = client;
     }
 
     public async Task<bool> Delete(TicketId ticketId)

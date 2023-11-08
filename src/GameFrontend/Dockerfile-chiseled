@@ -1,0 +1,12 @@
+FROM mcr.microsoft.com/dotnet/nightly/sdk:8.0.100-rc.2-jammy AS build
+WORKDIR /src
+COPY . .
+RUN apt-get update && apt-get install -y clang zlib1g-dev build-essential
+RUN dotnet restore
+RUN dotnet publish -c Release -o /publish --sc -v d
+
+
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-jammy-chiseled
+WORKDIR /app
+COPY --from=build /publish/GameFrontend ./
+CMD ["./GameFrontend"]
