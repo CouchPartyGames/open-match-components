@@ -1,5 +1,6 @@
 ﻿using Director2.OpenMatch;
 using Director2.Agones;
+using Director2.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Http.Resilience;
@@ -7,6 +8,13 @@ using Microsoft.Extensions.Http.Resilience;
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
+        services.Configure<HostOptions>(o =>
+        {
+            o.ShutdownTimeout = TimeSpan.FromSeconds(15);
+            o.ServicesStartConcurrently = true;
+            o.ServicesStopConcurrently = true;
+        });
+        
         services.AddGrpcClient<QueryService.QueryServiceClient>("OpenMatchQuery", o =>
         {
             var address = context.Configuration["OPENMATCH_QUERY_HOST"] ??
@@ -20,12 +28,14 @@ var host = Host.CreateDefaultBuilder(args)
                           "https://open-match-backend.open-match.svc.cluster.local:50505";
             o.Address = new Uri(address);
         }).AddStandardResilienceHandler();
-        
-        //context.Configuration["ALLOCATION"]
+
+        services.AddHostedService<DirectorService>();
+
     })
     .Build();
 
 
+await host.RunAsync();
 
 var allocationEndpoint = "localhost:5322";
 

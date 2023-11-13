@@ -3,7 +3,10 @@
 public static class ServiceCollections {
 
     public static IServiceCollection AddGrpcService(this IServiceCollection services) {
-        services.AddGrpc().AddJsonTranscoding();
+        services.AddGrpc(o =>
+        {
+            o.EnableDetailedErrors = true;
+        }).AddJsonTranscoding();
         //services.AddGrpcReflection();
 
         return services;
